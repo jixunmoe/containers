@@ -32,7 +32,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: name/app
+          images: ghcr.io/jixunmoe/packaging-crosscompile
           tags: |
             type=ref,event=branch
             type=ref,event=pr
