@@ -18,9 +18,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -47,3 +44,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ steps.meta.outputs.tags }}
+          cache-to: type=inline
