@@ -12,7 +12,7 @@ RUN apt-get -qq update \
     binutils-arm-linux-gnueabihf \
     crossbuild-essential-armhf \
     \
-    binutils-arm-linux-gnueabiel \
+    binutils-arm-linux-gnueabi \
     crossbuild-essential-armel \
     \
     binutils-aarch64-linux-gnu \
