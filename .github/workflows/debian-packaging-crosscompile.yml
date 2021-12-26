@@ -6,6 +6,8 @@ on:
       - main
     tags:
       - "v*"
+    paths:
+      - "debian-packaging-crosscompile/**"
 
 jobs:
   build:
