@@ -1,7 +1,14 @@
+# Pass in the real ip from upstream, e.g.:
+# nginx: "proxy_set_header X-Real-IP $remote_addr;"
+log_format dokuwiki '$http_x_real_ip - $remote_user [$time_local] '
+'"$uri" $status $body_bytes_sent '
+'"$http_referer" "$http_user_agent"';
+
 server {
     listen 80 default_server;
-
     server_name _;
+
+    access_log /var/log/nginx/access.log dokuwiki;
 
     # Maximum file upload size is 100MB - change accordingly if needed
     client_max_body_size 16M;

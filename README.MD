@@ -27,3 +27,10 @@ It will be upgraded on container startup.
 docker run --rm -it -p 127.0.0.1:80:80 -v "$PWD":/app \
     ghcr.io/jixunmoe/dokuwiki:stable_2020-07-29
 ```
+
+Put the container behind a reverse proxy and set `X-Real-IP`, e.g.:
+
+```
+proxy_set_header X-Real-IP $remote_addr;
+proxy_pass http://dokuwiki_internal;
+```
