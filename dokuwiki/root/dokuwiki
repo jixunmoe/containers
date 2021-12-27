@@ -9,29 +9,43 @@ if [ "$#" -gt 0 ]; then
                 echo 'php-fpm config test failed, restarting in 30s...'
             fi
         done
-    elif [ "$1" = "logging" ]; then
-        sleep 3
-        tail -f \
-            /var/log/nginx/error.log \
-            /var/log/nginx/access.log \
-            /var/log/php7.4-fpm.log
     else
         echo "unknown command: $1"
     fi
     exit
 fi
 
+grep_release() {
+    grep -oP --color=never '\d{4}-\d{2}-\d{2}'
+}
+
+INSTALLED_VERSION="$(< /app/VERSION grep_release)"
+NEW_VERSION="$(echo -n "$DOKUWIKI_RELEASE" | grep_release)"
+
+if [ "$INSTALLED_VERSION" != "$NEW_VERSION" ]; then
+    echo Install / update dokuwiki to ${DOKUWIKI_RELEASE}...
+    tar -C "/app" --strip-components=1 -zxf /dokuwiki.tar.gz
+    (cd /app \
+        && grep -Ev '^($|#)' data/deleted.files | xargs -n 1 rm -vf
+    )
+fi
+
+echo 'Fix any permission issues...'
+chown -R www-data "/app"    
+
+INSTALL_LOCK=/app/.dokuwiki.installed
+if [ -f "/app/install.php" ]; then
+    if [ -f "$INSTALL_LOCK" ]; then
+        echo Remove install.php...
+        rm -f /app/install.php
+    else
+        echo 'Next boot will remove "install.php"'
+        touch "$INSTALL_LOCK"
+    fi
+fi
+
 mkdir -p /run/php
 "$0" php-fpm &
-"$0" logging &
-
-INSTALL_LOCK=/remove-install.php.lock
-if [ -f "$INSTALL_LOCK" ]; then
-    rm -f /app/install.php "$INSTALL_LOCK"
-elif [ -f "/app/install.php" ]; then
-    echo 'Next boot will remove "install.php"'
-    touch "$INSTALL_LOCK"
-fi
 
 echo 'Starting nginx...'
 nginx -g 'daemon off;'

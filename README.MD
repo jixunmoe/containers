@@ -18,3 +18,12 @@ Container setup to perform cross-compilation and Debian packaging for
 ```sh
 docker pull ghcr.io/jixunmoe/dokuwiki:main
 ```
+
+Mount a the whole app directory for data preservation.
+
+It will be upgraded on container startup.
+
+```sh
+docker run --rm -it -p 127.0.0.1:80:80 -v "$PWD":/app \
+    ghcr.io/jixunmoe/dokuwiki:main
+```

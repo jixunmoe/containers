@@ -26,11 +26,15 @@ RUN apt-get update && apt-get install -y \
     php-zip \
     && rm -rf /var/lib/apt/lists/*
 
+# Disable nginx logging
+RUN mkdir -p /var/log/nginx \
+    && ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
+ENV DOKUWIKI_RELEASE=${DOKUWIKI_RELEASE}
 RUN mkdir -p "/app" \
-    && (curl -o- -L \
-    "https://github.com/splitbrain/dokuwiki/archive/refs/tags/release_${DOKUWIKI_RELEASE}.tar.gz" \
-    | tar -C "/app" --strip-components=1 -zxvf - ) \
-    && chown -R www-data "/app"
+    && curl -o/dokuwiki.tar.gz -L \
+    "https://github.com/splitbrain/dokuwiki/archive/refs/tags/release_${DOKUWIKI_RELEASE}.tar.gz"
 
 COPY root/ /
 
