@@ -45,7 +45,7 @@ jobs:
         with:
           context: dokuwiki
           build-args:
-            DOKUWIKI_RELEASE: "${{ matrix.dokuwiki_release }}"
+            - DOKUWIKI_RELEASE="${{ matrix.dokuwiki_release }}"
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
