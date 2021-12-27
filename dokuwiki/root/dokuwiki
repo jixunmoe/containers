@@ -47,7 +47,7 @@ fi
 
 # custom init.
 if [ -d /init.d ]; then
-    source /init.d/*.sh
+    . /init.d/*.sh
 fi
 
 mkdir -p /run/php
