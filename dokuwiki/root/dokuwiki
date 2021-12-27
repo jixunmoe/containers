@@ -1,0 +1,38 @@
+#!/bin/sh
+
+if [ "$#" -gt 0 ]; then
+    if [ "$1" = "php-fpm" ]; then
+        while true; do
+            php-fpm7.4 -F
+
+            if ! php-fpm7.4 -t; then
+                echo 'php-fpm config test failed, restarting in 30s...'
+            fi
+        done
+    elif [ "$1" = "logging" ]; then
+        sleep 3
+        tail -f \
+            /var/log/nginx/error.log \
+            /var/log/nginx/access.log \
+            /var/log/php7.4-fpm.log
+    else
+        echo "unknown command: $1"
+    fi
+    exit
+fi
+
+mkdir -p /run/php
+"$0" php-fpm &
+"$0" logging &
+
+INSTALL_LOCK=/remove-install.php.lock
+if [ -f "$INSTALL_LOCK" ]; then
+    rm -f /app/install.php "$INSTALL_LOCK"
+elif [ -f "/app/install.php" ]; then
+    echo 'Next boot will remove "install.php"'
+    touch "$INSTALL_LOCK"
+fi
+
+echo 'Starting nginx...'
+nginx -g 'daemon off;'
+echo 'nginx shutdown.'
