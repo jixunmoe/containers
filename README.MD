@@ -34,3 +34,5 @@ Put the container behind a reverse proxy and set `X-Real-IP`, e.g.:
 proxy_set_header X-Real-IP $remote_addr;
 proxy_pass http://dokuwiki_internal;
 ```
+
+You can also add custom init scripts to `/init.d/*.sh`.

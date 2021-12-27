@@ -44,6 +44,11 @@ if [ -f "/app/install.php" ]; then
     fi
 fi
 
+# custom init.
+if [ -d /init.d ]; then
+    source /init.d/*.sh
+fi
+
 mkdir -p /run/php
 "$0" php-fpm &
 
