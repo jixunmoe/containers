@@ -4,10 +4,9 @@ on:
   push:
     branches:
       - main
-    tags:
-      - "v*"
     paths:
       - "dokuwiki/**"
+      - ".github/workflows/dokuwiki.yml"
 
 jobs:
   build:
