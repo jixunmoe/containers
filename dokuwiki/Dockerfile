@@ -33,7 +33,7 @@ RUN mkdir -p /var/log/nginx \
 
 ENV DOKUWIKI_RELEASE=${DOKUWIKI_RELEASE}
 RUN mkdir -p "/app" \
-    && curl -o/dokuwiki.tar.gz -L \
+    && curl --fail -o/dokuwiki.tar.gz -L \
     "https://github.com/splitbrain/dokuwiki/archive/refs/tags/release_${DOKUWIKI_RELEASE}.tar.gz"
 
 COPY root/ /
