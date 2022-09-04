@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         dokuwiki_release:
-          - stable_2022-07-31
-          - stable_2020-07-29
+          - stable_2022-07-31a
+          - stable_2020-07-29a
 
     steps:
       - name: Checkout repository
