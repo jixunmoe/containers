@@ -17,7 +17,7 @@ if [ "$#" -gt 0 ]; then
 fi
 
 grep_release() {
-    cut -d' ' -f1
+    grep -oP --color=never '\d{4}-\d{2}-\d{2}[\S]*'
 }
 
 INSTALLED_VERSION="$(< /app/VERSION grep_release)"
