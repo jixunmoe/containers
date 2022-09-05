@@ -37,7 +37,6 @@ jobs:
             org.opencontainers.image.description=Hugo (extended) environment based on debian
           tags: |
             type=raw,value=${{ matrix.VER }}
-            type=sha
 
       - name: Build and push
         uses: docker/build-push-action@v2

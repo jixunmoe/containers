@@ -37,7 +37,6 @@ jobs:
             org.opencontainers.image.description=For spin up a new dokuwiki instance.
           tags: |
             type=raw,value=${{ matrix.dokuwiki_release }}
-            type=sha
 
       - name: Build and push
         uses: docker/build-push-action@v2
