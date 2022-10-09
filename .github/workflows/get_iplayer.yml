@@ -14,11 +14,11 @@ jobs:
     strategy:
       matrix:
         get_iplayer_version:
-          - main
+          - master
           - v3.30
         
         include:
-          - get_iplayer_version: main
+          - get_iplayer_version: master
             EXTRA_TAGS: 'type=raw,value=nightly'
           - get_iplayer_version: v3.30
             EXTRA_TAGS: 'type=raw,value=latest'

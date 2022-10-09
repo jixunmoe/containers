@@ -6,7 +6,7 @@ Source: https://github.com/get-iplayer/get_iplayer
 
 This repo will try to maintain the latest version + nightly (at the time of image built):
 
-- `main` (`nightly`)
+- `master` (`nightly`)
 - `v3.30` (`latest`)
 
 ## Usage (Pre-built image)
@@ -22,7 +22,7 @@ get_iplayer --help
 
 ## Build
 
-`GET_IPLAYER_VERSION` can be `v3.30` (default), or `main` (nightly).
+`GET_IPLAYER_VERSION` can be `v3.30` (default), or `master` (nightly).
 
 Find version names here: [get_iplayer:tags][gi_tags]
 
