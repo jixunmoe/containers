@@ -14,8 +14,12 @@ jobs:
     strategy:
       matrix:
         VER:
-          - 0.101.0
-          - 0.91.2
+          - 0.103.1
+          - 0.104.3
+
+        include:
+          - VER: 0.104.3
+            EXTRA_TAGS: 'type=raw,value=latest'
 
     steps:
       - name: Checkout repository
@@ -37,6 +41,7 @@ jobs:
             org.opencontainers.image.description=Hugo (extended) environment based on debian
           tags: |
             type=raw,value=${{ matrix.VER }}
+            ${{ matrix.EXTRA_TAGS }}
 
       - name: Build and push
         uses: docker/build-push-action@v2

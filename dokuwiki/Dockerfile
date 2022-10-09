@@ -1,4 +1,4 @@
-FROM debian:11.2-slim
+FROM debian:11.5-slim
 
 # Find the version here:
 # https://github.com/splitbrain/dokuwiki/tags

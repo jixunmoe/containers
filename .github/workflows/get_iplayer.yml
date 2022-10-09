@@ -16,6 +16,12 @@ jobs:
         get_iplayer_version:
           - main
           - v3.3.0
+        
+        include:
+          - get_iplayer_version: main
+            EXTRA_TAGS: 'type=raw,value=nightly'
+          - get_iplayer_version: v3.3.0
+            EXTRA_TAGS: 'type=raw,value=latest'
 
     steps:
       - name: Checkout repository

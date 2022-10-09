@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:11.5-slim
 
 ARG VER=0.91.2
 

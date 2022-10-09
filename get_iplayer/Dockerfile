@@ -12,7 +12,8 @@ RUN apt-get update \
     liblwp-protocol-https-perl \
     libmojolicious-perl \
     libwww-perl \
-    libxml-libxml-perl
+    libxml-libxml-perl \
+    && rm -rf /var/lib/apt/lists/*
 
 ARG GET_IPLAYER_VERSION=v3.30
 

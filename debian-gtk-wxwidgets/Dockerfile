@@ -1,15 +1,13 @@
-FROM debian:11.3
+FROM debian:11.5
 
 RUN apt-get update \
   && apt-get --no-install-recommends -y install \
   bzip2 \
+  build-essential \
   ca-certificates \
   cmake \
   file \
-  gcc \
-  g++ \
   git \
-  make \
   libgtk-3-dev \
   librsvg2-dev \
   wget \

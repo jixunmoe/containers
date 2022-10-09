@@ -2,6 +2,13 @@
 
 Source: https://github.com/get-iplayer/get_iplayer
 
+## Tags
+
+This repo will try to maintain the latest version + nightly (at the time of image built):
+
+- `main` (`nightly`)
+- `v3.3.0` (`latest`)
+
 ## Usage (Pre-built image)
 
 ```sh
