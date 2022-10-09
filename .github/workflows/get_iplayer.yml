@@ -46,9 +46,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: get_iplayer
-          platforms:
-            - linux/arm64
-            - linux/amd64
+          platforms: |
+            linux/arm64
+            linux/amd64
           build-args: |
             GET_IPLAYER_VERSION=${{ matrix.get_iplayer_version }}
           push: ${{ github.event_name != 'pull_request' }}
