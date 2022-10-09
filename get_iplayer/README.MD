@@ -22,7 +22,7 @@ get_iplayer --help
 
 ## Build
 
-`GET_IPLAYER_VERSION` can be `v3.30` (default), or `main` (latest).
+`GET_IPLAYER_VERSION` can be `v3.30` (default), or `main` (nightly).
 
 Find version names here: [get_iplayer:tags][gi_tags]
 
