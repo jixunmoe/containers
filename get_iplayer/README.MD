@@ -2,6 +2,17 @@
 
 Source: https://github.com/get-iplayer/get_iplayer
 
+## Usage (Pre-built image)
+
+```sh
+alias get_iplayer="mkdir -p downloads \
+    && docker run -i --rm --user '$(id -u)' \
+        -v \"\$(pwd)/downloads:/downloads\" \
+        ghcr.io/jixunmoe/get_iplayer:v3.30 get_iplayer"
+
+get_iplayer --help
+```
+
 ## Build
 
 `GET_IPLAYER_VERSION` can be `v3.30` (default), or `main` (latest).
@@ -12,7 +23,7 @@ Find version names here: [get_iplayer:tags][gi_tags]
 docker build --build-arg GET_IPLAYER_VERSION=v3.30 -t get_iplayer .
 ```
 
-## Use
+## Usage (local image)
 
 ```sh
 alias get_iplayer="mkdir -p downloads \
