@@ -15,12 +15,12 @@ jobs:
       matrix:
         get_iplayer_version:
           - main
-          - v3.3.0
+          - v3.30
         
         include:
           - get_iplayer_version: main
             EXTRA_TAGS: 'type=raw,value=nightly'
-          - get_iplayer_version: v3.3.0
+          - get_iplayer_version: v3.30
             EXTRA_TAGS: 'type=raw,value=latest'
 
     steps:

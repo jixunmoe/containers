@@ -7,7 +7,7 @@ Source: https://github.com/get-iplayer/get_iplayer
 This repo will try to maintain the latest version + nightly (at the time of image built):
 
 - `main` (`nightly`)
-- `v3.3.0` (`latest`)
+- `v3.30` (`latest`)
 
 ## Usage (Pre-built image)
 
@@ -15,19 +15,19 @@ This repo will try to maintain the latest version + nightly (at the time of imag
 alias get_iplayer="mkdir -p downloads \
     && docker run -i --rm --user '$(id -u)' \
         -v \"\$(pwd)/downloads:/downloads\" \
-        ghcr.io/jixunmoe/get_iplayer:v3.3.0 get_iplayer"
+        ghcr.io/jixunmoe/get_iplayer:v3.30 get_iplayer"
 
 get_iplayer --help
 ```
 
 ## Build
 
-`GET_IPLAYER_VERSION` can be `v3.3.0` (default), or `main` (nightly).
+`GET_IPLAYER_VERSION` can be `v3.30` (default), or `main` (nightly).
 
 Find version names here: [get_iplayer:tags][gi_tags]
 
 ```sh
-docker build --build-arg GET_IPLAYER_VERSION=v3.3.0 -t get_iplayer .
+docker build --build-arg GET_IPLAYER_VERSION=v3.30 -t get_iplayer .
 ```
 
 ## Usage (local image)

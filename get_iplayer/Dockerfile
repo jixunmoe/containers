@@ -17,7 +17,7 @@ RUN apt-get update \
 
 ARG GET_IPLAYER_VERSION=v3.30
 
-RUN curl -o/usr/local/bin/get_iplayer \
+RUN curl --fail -o/usr/local/bin/get_iplayer \
     "https://raw.githubusercontent.com/get-iplayer/get_iplayer/${GET_IPLAYER_VERSION}/get_iplayer" \
     && chmod a+x /usr/local/bin/get_iplayer
 
