@@ -14,5 +14,5 @@ This repo will try to maintain the last 2 released versions:
 ## Usage
 
 ```sh
-docker pull ghcr.io/jixunmoe/hugo:main
+docker pull ghcr.io/jixunmoe/hugo:latest
 ```
