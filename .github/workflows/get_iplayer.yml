@@ -1,0 +1,58 @@
+name: "get_iplayer"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "get_iplayer/**"
+      - ".github/workflows/get_iplayer.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        get_iplayer_version:
+          - main
+          - v3.3.0
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Multi-arch build
+      - name: Set up QEMU dependency
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/jixunmoe/get_iplayer
+          tags: |
+            type=raw,value=${{ matrix.get_iplayer_version }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: get_iplayer
+          platforms:
+            - linux/arm64
+            - linux/amd64
+          build-args: |
+            GET_IPLAYER_VERSION=${{ matrix.get_iplayer_version }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ steps.meta.outputs.tags }}
+          cache-to: type=inline
