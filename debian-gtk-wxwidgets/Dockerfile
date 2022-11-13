@@ -1,4 +1,8 @@
-FROM debian:11.5
+FROM debian:bullseye-20221024
+
+ARG WXWIDGETS_VERSION=3.2.1
+ENV APPIMAGE_EXTRACT_AND_RUN=1
+ENV DEPLOY_GTK_VERSION=3
 
 RUN apt-get update \
   && apt-get --no-install-recommends -y install \
@@ -13,7 +17,6 @@ RUN apt-get update \
   wget \
   && rm -rf /var/lib/apt/lists/*
 
-ARG WXWIDGETS_VERSION=3.1.6
 RUN mkdir -p /code/deps/wxwidgets \
   && wget -q -O - https://github.com/wxWidgets/wxWidgets/releases/download/v${WXWIDGETS_VERSION}/wxWidgets-${WXWIDGETS_VERSION}.tar.bz2 \
   | tar --strip-components=1 -C /code/deps/wxwidgets -jxf - \
@@ -27,8 +30,6 @@ RUN mkdir -p /code/deps/wxwidgets \
   && rm -rf /code/deps/wxwidgets
 
 # Deployment tool
-ENV APPIMAGE_EXTRACT_AND_RUN=1
-ENV DEPLOY_GTK_VERSION=3
 RUN \
   wget -q -P /usr/local/bin/ \
   "https://raw.githubusercontent.com/linuxdeploy/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh" \
