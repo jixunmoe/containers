@@ -7,3 +7,4 @@ For insturctions, checkout individual readme documents:
 - [Dokuwiki (`dokuwiki`)](./dokuwiki/README.md)
 - [get_iplayer](./get_iplayer/README.MD)
 - [Hugo](./hugo/README.MD)
+- [ffmpeg-builder](./ffmpeg-builder/README.MD)
