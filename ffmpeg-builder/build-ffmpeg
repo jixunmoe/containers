@@ -1,0 +1,55 @@
+#!/bin/sh -ex
+
+cd /build/src
+
+COMPILE_VER=snapshot
+if [ ! -z "$1" ]; then
+  COMPILE_VER="$1"
+  shift
+fi
+
+# Use it like: "-O2 -ftree-vectorize"
+EXTRA_CFLAGS="-O3"
+if [ ! -z "$1" ]; then
+  EXTRA_CFLAGS="$1"
+  shift
+fi
+
+if [ "$GCC_BUILD_ARCH" == "" ]; then
+  GCC_BUILD_ARCH="x86-64"
+fi
+
+renice -n 19 -p $$
+
+wget -qO - "https://ffmpeg.org/releases/ffmpeg-${COMPILE_VER}.tar.bz2" | tar jx
+
+cd "ffmpeg-${COMPILE_VER}"
+
+./configure \
+  --cc="${CC}" \
+  --objcc="${CC}" \
+  --dep-cc="${CC}" \
+  --prefix="/usr" \
+  --pkg-config-flags="--static" \
+  --extra-cflags="${EXTRA_CFLAGS} -march=${GCC_BUILD_ARCH} -static -Wl,-Bdynamic,-lgcc_s,-Bstatic" \
+  --extra-ldflags="-static" \
+  --extra-libs="-lpthread -lm" \
+  --bindir="/build/bin" \
+  --enable-static \
+  --enable-gpl \
+  --enable-gnutls \
+  --enable-libass \
+  --enable-libfdk-aac \
+  --enable-libfreetype \
+  --enable-libmp3lame \
+  --enable-libopus \
+  --enable-libvorbis \
+  --enable-libvpx \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-libbluray \
+  --enable-ffplay \
+  --enable-nonfree
+
+make -j$(nproc)
+make install
