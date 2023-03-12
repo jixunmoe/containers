@@ -3,6 +3,7 @@
 name: "Build base image"
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
