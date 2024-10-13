@@ -14,12 +14,11 @@ jobs:
     strategy:
       matrix:
         VER:
+          - 0.135.0
           - 0.125.4
-          - 0.104.3
-          - 0.103.1
 
         include:
-          - VER: 0.125.4
+          - VER: 0.135.0
             EXTRA_TAGS: 'type=raw,value=latest'
 
     steps:
